@@ -1,0 +1,8 @@
+#!/bin/sh
+./clean
+rm -r 0
+cp -r 0_orig 0
+blockMesh
+setFields
+
+

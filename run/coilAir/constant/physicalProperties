@@ -1,0 +1,23 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+    class           dictionary;
+    object          physicalProperties;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+muMag           muMag [1 1 -2 0 0 -2 0] 1.26e-6; // Magnetic permeability in vacuum
+w              w  [0 0 -1 0 0 0 0] 3.3e7; //Frequency in 1/s, 
+                                          //w=3.3e7 1/s -> f=5.2 MHz
+
+// ************************************************************************* //

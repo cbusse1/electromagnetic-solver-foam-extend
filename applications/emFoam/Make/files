@@ -1,0 +1,3 @@
+emFoam.C
+
+EXE = $(FOAM_APPBIN)/emFoam

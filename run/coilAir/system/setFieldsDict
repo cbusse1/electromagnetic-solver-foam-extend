@@ -1,0 +1,102 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1806                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Geometry Parameters
+Rarg 0.025; //radius of the electrically conductive (argon) domain 
+R 0.033;    //radial position of the coil turns 
+rc 0.003;   //radius of coil wire
+L   1.0;    // height of argon domain, a greater value than the actual mesh 
+            // height is chosen to make sure that setFields patches all the cells 
+
+// z_i, coil turn coordinates
+z1 0.121;
+z2 0.15;
+z3 0.179;
+
+// Source Current Density Jval = I/(pi*rc^2) in A/m^2
+//Jval 5305165; //I=150A
+Jval 5962963; //I=161A
+
+// Electrical Conductivity in S/m
+sigmaArg 0; //Air
+//sigmaArg 2500; //Argon at approx. 10000K
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+defaultFieldValues
+(
+    volScalarFieldValue sigma 0
+    volVectorFieldValue AR (0 0 0)
+    volVectorFieldValue AI (0 0 0)
+    volVectorFieldValue Jcoil (0 0 0)
+);
+
+regions
+(
+    // 1st turn
+    cylinderToCell
+    {
+       p1       ($R -0.1 $z1); 	// start point on cylinder axis
+       p2       ($R 0.1 $z1);   	// end point on cylinder axis
+       radius   $rc;       
+       fieldValues
+       (
+           volVectorFieldValue Jcoil (0 $Jval 0)
+       );
+    } 
+	
+    // 2nd turn
+    cylinderToCell
+    {
+       p1       ($R -0.1 $z2); 	// start point on cylinder axis
+       p2       ($R 0.1 $z2);   	// end point on cylinder axis
+       radius   $rc;       
+       fieldValues
+       (
+           volVectorFieldValue Jcoil (0 $Jval 0)
+       );
+    } 
+	
+    // 3rd turn
+    cylinderToCell
+    {
+       p1       ($R -0.1 $z3); 	// start point on cylinder axis
+       p2       ($R 0.1 $z3);   	// end point on cylinder axis
+       radius   $rc;       
+       fieldValues
+       (
+           volVectorFieldValue Jcoil (0 $Jval 0)
+       );
+    } 
+/*
+    //Argon Domain
+    cylinderToCell
+    {
+       p1       (0 0 0); 	// start point on cylinder axis
+       p2       (0 0 $L);   	// end point on cylinder axis
+       radius   $Rarg;       
+       fieldValues
+       (
+           volScalarFieldValue sigma $sigmaArg
+       );
+    } 
+*/
+);
+
+
+
+// ************************************************************************* //

@@ -1,0 +1,81 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5                                   |
+|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+    class           dictionary;
+    object          controlDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     emFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         0.02;
+
+deltaT          0.02;
+
+writeControl    timeStep;
+
+writeInterval   1;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression false;
+
+timeFormat      general;
+
+timePrecision   6;
+
+graphFormat     raw;
+
+runTimeModifiable yes;
+
+//functions   ();
+
+/*
+functions
+{
+
+    linesample
+    {
+        type                      sets;
+        functionObjectLibs        ("libsampling.so");
+        outputControl             timeStep;
+        outputInterval            1;
+        interpolationScheme       cell;
+        setFormat                 raw;
+        sets
+        (
+            data
+            {
+                type            midPoint;
+                axis            distance;
+                start           (0 0 0.15);
+                end             (0 0 1);
+                nPoints         1000;
+            }
+        );
+        fields                  (Hmag);
+    }
+}
+*/
+
+// ************************************************************************* //
